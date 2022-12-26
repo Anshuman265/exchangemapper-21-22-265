@@ -1,0 +1,31 @@
+<!--div class="footer">
+  <p>Footer</p>
+</div-->
+<style>
+    @media screen and (max-width: 350px) {
+        footer {
+            font-size: 0.6rem !important;
+            /*
+            position: absolute;
+            bottom: 0 !important;
+            margin: 0 auto;*/
+        }
+    }
+</style>
+<div class="footer">
+    <footer class="bg-light py-3">
+        <div class=" row container-fluid ">
+            <!-- Copyright -->
+            <div class="col-md-4 text-center my-md-0 my-1 " style="font-family: 'Roboto', sans-serif; "><i class="far fa-copyright "></i> 2021 Copyright
+                <strong>UGAC, IIT Bombay</strong>
+            </div>
+            <div class="col-md-4 text-center my-md-0 my-1 " style="font-family: 'Roboto', sans-serif; ">
+                Created by <a href="{% url 'main:team' %} " target="_blank " style="color: black !important; ">UGAC Web & Design Team, 2021-2022</a>
+            </div>
+            <div class="col-md-4 text-center my-md-0 my-1 " style="font-family: 'Roboto', sans-serif;color:black !important ">
+                Want to report a bug?
+                <a href="https://docs.google.com/forms/d/15fY255gtL3yzOlDn_eWth8iEquIRMfF73l6n4gnEpJ8/ " target="_blank ">Click Here</a>
+            </div>
+        </div>
+    </footer>
+</div>

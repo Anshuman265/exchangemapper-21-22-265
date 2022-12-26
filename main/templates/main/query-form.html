@@ -1,0 +1,222 @@
+{%extends 'main/base.html'%}{% load static %} {%block content%}
+
+<body>
+    <style type="text/css">
+        @import url("https://fonts.googleapis.com/css?family=Hind:300,400&display=swap");
+        * {
+            box-sizing: border-box;
+        }
+        
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+        
+        .big {
+            margin: 0;
+            padding: 0;
+            font-family: "Hind", sans-serif;
+            background: #fff;
+            color: #4d5974;
+            display: flex;
+            min-height: 77vh;
+        }
+        
+        .container {
+            margin: 0 auto;
+            padding: 4rem;
+            width: 48rem;
+        }
+        
+        .accordion .accordion-item {
+            border-bottom: 1px solid #e5e5e5;
+            padding: 15px;
+        }
+        
+        .accordion .accordion-item button[aria-expanded=true] {
+            border-bottom: 1px solid #03b5d2;
+        }
+        
+        .accordion button {
+            position: relative;
+            display: block;
+            text-align: left;
+            width: 100%;
+            padding: 1em 0;
+            color: #7288a2;
+            font-size: 1.15rem;
+            font-weight: 400;
+            border: none;
+            background: none;
+            outline: none;
+        }
+        
+        .accordion button:hover,
+        .accordion button:focus {
+            cursor: pointer;
+            color: #03b5d2;
+        }
+        
+        .accordion button:hover::after,
+        .accordion button:focus::after {
+            cursor: pointer;
+            color: #03b5d2;
+            border: 1px solid #03b5d2;
+        }
+        
+        .accordion button .accordion-title {
+            padding: 1em 1.5em 1em 0;
+        }
+        
+        .accordion button .icon {
+            display: inline-block;
+            position: absolute;
+            top: 18px;
+            right: 0;
+            width: 22px;
+            height: 22px;
+            border: 1px solid;
+            border-radius: 22px;
+        }
+        
+        .accordion button .icon::before {
+            display: block;
+            position: absolute;
+            content: "";
+            top: 9px;
+            left: 5px;
+            width: 10px;
+            height: 2px;
+            background: currentColor;
+        }
+        
+        .accordion button .icon::after {
+            display: block;
+            position: absolute;
+            content: "";
+            top: 5px;
+            left: 9px;
+            width: 2px;
+            height: 10px;
+            background: currentColor;
+        }
+        
+        .accordion button[aria-expanded=true] {
+            color: #03b5d2;
+        }
+        
+        .accordion button[aria-expanded=true] .icon::after {
+            width: 0;
+        }
+        
+        .accordion button[aria-expanded=true]+.accordion-content {
+            opacity: 1;
+            max-height: 9em;
+            transition: all 200ms linear;
+            will-change: opacity, max-height;
+        }
+        
+        .accordion .accordion-content {
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: opacity 200ms linear, max-height 200ms linear;
+            will-change: opacity, max-height;
+        }
+        
+        .accordion .accordion-content p {
+            font-size: 1rem;
+            font-weight: 300;
+            margin: 2em 0;
+        }
+        
+        @media screen and (max-width: 600px) {
+            .accordion-title {
+                font-size: 1.2rem !important;
+            }
+            .text-muted {
+                font-size: 12px !important;
+            }
+            .date_answered {
+                font-size: 12px !important;
+            }
+            p,
+            strong {
+                font-size: 12px !important;
+            }
+            .vote-text,
+            .btn-outline-success,
+            .btn-outline-danger,
+            .btn-dark {
+                font-size: 0.8rem !important;
+            }
+            .container {
+                width: 100% !important;
+            }
+            .big .container h2 {
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media screen and (max-width: 350px) {
+            .accordion-title {
+                font-size: 1rem !important;
+            }
+            .text-muted {
+                font-size: 0.6rem !important;
+            }
+            .asked-by {
+                font-size: 0.6rem !important;
+            }
+            p,
+            strong
+            {
+                font-size: 10px !important;
+            }
+            .vote-text,
+            .btn-outline-success,
+            .btn-outline-danger,
+            .btn-dark {
+                font-size: 0.8rem !important;
+            }
+            .container {
+                width: 100% !important;
+            }
+            .icon {
+                display: none !important;
+            }
+            .big .container h2 {
+                font-size: 1rem;
+            }
+        }
+    </style>
+    <!-- partial:index.partial.html -->
+    <div class="big">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            {%if list_doubt|length != 0%}
+            <div class="accordion">
+                {% for data in list_doubt %}
+                <div class="accordion-item" style="border-color: rgb(109, 201, 201);">
+                    <button id="accordion-button-1" aria-expanded="false"><span class="accordion-title"> {{data.text}} </span> <br> <span class="text-muted" style="font-size:small;">-Asked by:</span> <span style="color: #4d5974;font-size: small;" class="asked-by">{{data.student.name}} on  {{data.date_posted}}  </span><span class="icon" aria-hidden="true"></span></button>
+                    <div class="accordion-content">
+                        <p><a href="{% url 'main:answer' data.pk %}"> Answers({{data.no_of_answer}})  </a></p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="container text-center" style="background-color: #e5e5e5;">
+                <span class="h4">No questions found!</span>
+            </div>
+            {%endif%}
+            <a href="{% url 'main:doubt-form' %}" class='btn btn-dark' style="margin-top: 20px;"> Ask a question </a>
+        </div>
+        <!-- partial -->
+        <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
+        <script src="{% static 'js/faq.js' %}"></script>
+    </div>
+
+
+</body>
+{%endblock content%}

@@ -1,0 +1,378 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/guide_new.css' %}">
+
+    <title>Exchange Mapper</title>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+    #robot,
+    #robot2 {
+        font-family: 'Roboto', sans-serif !important;
+    }
+</style>
+
+<body>
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light py-2 navbar-custom" style="margin-bottom:0px;background-color: #222222 !important;">
+        <a class="navbar-brand" href="{%url 'main:login_button'%}">
+            <h2>Exchange Mapper</h2>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                {% if user.is_staff %}
+                <li class="nav-item ">
+                    <h4><a class="nav-link " href="{%url 'admin:index' %} ">Admin</a></h4>
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'main:guide' %}">
+                        <h4>Guide</h4>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{%url 'main:mapper_home'%}">
+                        <h4>Mapper</h4>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'main:blog' %}">
+                        <h4>Blogs</h4>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'main:doubt' %}">
+                        <h4>Forum</h4>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <h4><a class="nav-link " href="{%url 'sso:logout' %} ">Logout</a></h4>
+                </li>
+            </ul>
+        </div>
+    </nav> -->
+    {% include 'main/nav.html' %}
+    <header>
+        <div class="container text-center" id="robot">
+            <h1>Process for Outbound Exchange Student</h1>
+            <p id="robot2">Students of IITB interested in participating in Exchange programs of IITB with international universities need to start preparing for it well in advance. Students can do course work and/or project work at an Institution with whom IITB has
+                an MoU. There are separate schemes for student exchanges and research work, the details of which are available under list of MoUs. For doing project/research work at a Host institution the onus of finding a guide rests with the student.
+                They also need the concurrence of the project guide at IITB if they wish to submit their work done abroad towards their degree and get credits for it.</p>
+            <!--p>Sava Lazic</p-->
+        </div>
+    </header>
+
+    <section class="timeline">
+        <div class="container">
+            <!--First Card-->
+            <div class="timeline-item" style="margin-top: 10px;">
+                <div class="timeline-img"></div>
+                <div class="timeline-content js--fadeInLeft">
+
+                    <div class="date">Step 1</div>
+                    <br>
+                    <br>
+                    <h2>While applying</h2>
+                    <p>See the list of MoUs. <br> You must plan your visit in such a way that the academic calendar of IIT Bombay is maintained.
+                        <br> <em>For course work:</em>
+                        <ol>
+                            <li>Identify the university that you would like to go to, from the IR website.</li>
+                            <li>Make a list of the courses that you should be taking at IITB in the semester(s) in which you want to go on a sem ....</li>
+                        </ol>
+                    </p>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        Read More
+                    </button>
+                </div>
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">While applying</h5>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>
+                                    <br>
+                                    <strong> See the list of <a href="https://www.ir.iitb.ac.in/en?page_id=137" target="_blank">MoUs</a>  </strong> <br> You must plan your visit in such a way that the academic calendar of IIT Bombay is maintained.<br>                                    <br> <em> <strong>For course work:</strong></em>
+                                    <br> <br>1.Identify the university that you would like to go to, from the IR website.<br><br> 2.Make a list of the courses that you should be taking at IITB in the semester(s) in which you want to go on a semester/year
+                                    long exchange. <br><br> Prepare a table clearly indicating the IITB courses and the equivalent courses at the Host institute. Mention your SPI / CPI in the application (Attach copy of transcript as available on ASC).
+                                    <br> <br> For Minor related courses, you must also obtain prior permission from the relevant department offering the minor. <br> For Honors courses, you must have the approval of Head of the Department for equivalence
+                                    of the Honors courses from the host institute.
+                                    <br><br>3.Look at the host university websites to select the courses that you’d like to do over there. (Choose 2-3 courses in addition to the ones required so that in case the course you want to take is not offered,
+                                    you have an alternative.)
+                                    <br><br> <em> <strong>For project work:</strong> </em> <br><br> 1.You have to identify a project or make a plan for research work along with your departmental BTP/DDP/MTP guide. <br> <br>2.Write to a professor at the
+                                    host university to see if (s)he will accept you to do research work. Your guide may have contacts in the host university and they may help you by forwarding your email with their comments/ recommendations.<br><br> 3.On
+                                    receiving an acceptance note from the host professor, you need to follow the remaining steps as for the course work students. <br><br> (Step 4 onwards are common for course work or project/research work students) <br><br>                                    4.Write a letter addressed to the Dean IR, and forward it through the Head of your department, indicating your interest in proceeding for the exchange program. This should include a request for approval for courses/project/research
+                                    work that you want to do in lieu of the courses/project that you would have done at IITB. <br><br> Also, attach your latest grade sheet reflecting your current CPI. <br><br> The Department approval should reach the
+                                    Office of Dean-IR at least 15 days prior to the Host Institute’s deadline. <br><br> 5.Once the approval from your HOD is received, the office of Dean IR will put you in touch with the International office of the Host
+                                    institute and provide you with the links for online application for your exchange program. Host universities require the physical forms, countersigned by the Dean IR, to be sent by post as well. The student is responsible
+                                    for getting these forms signed and posting it to the Host University. <br><br> (Note: If the number of applications received exceed the number of seats available under the exchange program at the host institute, Dean-IR
+                                    will shortlist the students on the basis of their CPI). <br> <br>Simultaneously, Dean-IR will forward the applications of the nominated students to the Convener- UGAPEC / PGAPEC (as applicable) with his recommendation.<br><br>                                    6.The final decision to admit each student nominated for the exchange rests with the host institute.<br> <br>Also, the student is permitted to proceed for the exchange program only after receiving the permission letter
+                                    from the Academic office.<br> <br>7.Finances: <br><br> A] In most cases, the finances are to be borne by the students themselves. IITB does not have any mechanism yet, to support exchange students financially. Some
+                                    exchange agreements include a funding mechanism and this information is provided, where available, on the IR website – Exchange MoUs page. <br><br> B] In some universities, as indicated on the IR website, free accommodation
+                                    is available. <br><br> C] Some universities have associated scholarships/awards that can be applied for separately. <br><br> D] In some universities, students are allowed to work part time in on-campus positions including
+                                    working on research projects. This option can be exercised to defray some of the living expenses. IITB cannot assist in procuring such positions. These have to be sought by the students themselves. <br>
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Second Card-->
+            <div class="timeline-item">
+
+                <div class="timeline-img"></div>
+                <div data-aos="fade-left">
+                    <div class="timeline-content js--fadeInRight">
+
+                        <div class="date">Step 2</div>
+                        <br>
+                        <h2>Before proceeding for the exchange</h2>
+                        <p>
+                            <ol>
+                                <li>Sign the Declaration form (PDF,DOC) & submit it to Dean-IR office.</li>
+                                <li>Submit a photocopy of the offer letter from the foreign University to the Dean-IR office, for our record...</li>
+                            </ol>
+                        </p>
+
+                        <button type="button" class="btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal2" style="margin-left: 10px;">
+                            Read More
+                        </button>
+                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Before proceeding for the exchange</h5>
+                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <ol>
+                                        <li>Sign the Declaration form (<a href="https://www.ir.iitb.ac.in/sites/www.ir.iitb.ac.in/themes/intrelation/file/Declaration%20form.pdf" target="_blank">PDF</a>,<a href="https://www.ir.iitb.ac.in/sites/www.ir.iitb.ac.in/themes/intrelation/file/Declaration%20form.doc"
+                                                target="_blank">DOC</a>) & submit it to Dean-IR office.</li>
+                                        <li>Submit a photocopy of the offer letter from the foreign University to the Dean-IR office, for our record.</li>
+                                        <li>You need to discuss with the Hostel Hall Manager if you would like to retain / vacate your Hostel room while you are away on the exchange visit.</li>
+                                        <li>Pay the fees for the semester at IIT Bombay.</li>
+                                        <li>Check with Academic office for any other formalities required – Application for Leave during exchange, next semester registrations, etc</li>
+                                    </ol>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Third Card-->
+            <div class="timeline-item">
+
+                <div class="timeline-img"></div>
+
+                <div class="timeline-content js--fadeInLeft">
+                    <div class="date">Step 3</div>
+                    <br>
+                    <br>
+                    <h2>While at the host University</h2>
+                    <blockquote>
+                        <ol>
+                            <li>In case of any variations in the course plan approved, please consult your faculty advisor and obtain the necessary approvals thro....</li>
+
+                        </ol>
+                    </blockquote>
+                    <button type="button" class="btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal3" style="margin-left: 10px;">
+                                            Read More
+                                        </button>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">While at the host University</h5>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <ol>
+                                    <li>In case of any variations in the course plan approved, please consult your faculty advisor and obtain the necessary approvals through the Dept. This should then be sent to the Academic office.</li>
+                                    <li>If you are abroad during the period of payment of fees, make arrangements to pay the fees within the time limit.</li>
+                                    <li>Give the address of the Dean (IR) office for receiving a copy of the grade card. If you wish to receive the grade card directly, you need not give the IR office address. However, please submit a copy of the grade card
+                                        to us for records.</li>
+                                </ol>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Fourth Card-->
+            <div class="timeline-item">
+
+                <div class="timeline-img"></div>
+                <div data-aos="fade-left">
+                    <div class="timeline-content js--fadeInRight">
+
+                        <div class="date">Step 4</div>
+                        <br>
+                        <h2>After returning to IIT Bombay</h2>
+                        <p>After your return from the exchange visit, you need to write to the Head of the Dept. to request transfer of credits, enclosing your grade card from the foreign university and a copy of the earlier approval that was given by the
+                            HOD. The department would then forward the Grade conversion form <a href="https://www.ir.iitb.ac.in/sites/www.ir.iitb.ac.in/themes/intrelation/file/Semester-Exchange-Grade-conversion-UG-PG-revised-Oct-2018.doc" target="_blank">&nbsp; Grade conversion template</a>                            to the UGAPEC Convener.</p>
+
+                        <!--button type="button" class="btn-outline-primary btn-sm" data-toggle="modal" data-target="#exampleModal4" style="margin-left: 10px;">
+                                                Read More
+                                            </button>
+                    </div>
+                    < Modal -->
+                        <!--div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Step 4</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    See the list of MoUs <br> You must plan your visit in such a way that the academic calendar of IIT Bombay is maintained.<br> <em>For course work</em> : 1.Identify the university that you would like to go to, from the
+                                    IR website. 2.Make a list of the courses that you should be taking at IITB in the semester(s) in which you want to go on a semester/year long exchange. Prepare a table clearly indicating the IITB courses and the equivalent
+                                    courses at the Host institute. Mention your SPI / CPI in the application (Attach copy of transcript as available on ASC). For Minor related courses, you must also obtain prior permission from the relevant department
+                                    offering the minor. For Honors courses, you must have the approval of Head of the Department for equivalence of the Honors courses from the host institute. 3.Look at the host university websites to select the courses
+                                    that you’d
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div-->
+                    </div>
+                </div>
+            </div>
+    </section>
+    <!-- <div class="footer">
+        <footer class="bg-light py-3">
+            <div class="row container-fluid">
+                
+                <div class="col-md-4 text-center my-md-0 my-1" style="font-family: 'Roboto', sans-serif;"><i class="far fa-copyright"></i> 2021 Copyright
+                    <b>UGAC, IIT Bombay</b>
+                </div>
+                <div class="col-md-4 text-center my-md-0 my-1" style="font-family: 'Roboto', sans-serif;">
+                    Created by <a href="{% url 'main:team' %}" style="color: black !important;">UGAC Web & Design Team, 2021-2022</a>
+                </div>
+                <div class="col-md-4 text-center my-md-0 my-1" style="font-family: 'Roboto', sans-serif;color: black !important;">
+                    Want to report a bug?
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfh1NQEkCOYf22FUTieQH9fy1azPRJBF1BmaGXByobjX1hoOQ/viewform?usp=sf_link " target="_blank ">Click Here</a>
+                </div>
+            </div>
+        </footer>
+    </div> -->
+    {% include 'main/footer.html' %}
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!--script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+
+</html>
+<!--Start here-->
+<!--div class="timeline-item ">
+
+                            <div class="timeline-img "></div>
+                            <div data-aos="fade-right ">
+                                <div class="timeline-content timeline-card js--fadeInLeft ">
+                                    <div class="timeline-img-header ">
+                                        <h2>Card Title</h2>
+                                    </div>
+                                    <div class="date ">10 JULY 2016</div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe atque totam aperiam sed nulla voluptatem recusandae dolor, nostrum excepturi amet in dolores. Alias, ullam.</p>
+                                    <a class="bnt-more " href="javascript:void(0) ">More</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item ">
+
+                            <div class="timeline-img "></div>
+                            <div data-aos="fade-left ">
+                                <div class="timeline-content timeline-card js--fadeInRight ">
+                                    <div class="timeline-img-header ">
+                                        <h2>Card Title</h2>
+                                    </div>
+                                    <div class="date ">30 JULY 2016</div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe atque totam aperiam sed nulla voluptatem recusandae dolor, nostrum excepturi amet in dolores. Alias, ullam.</p>
+                                    <a class="bnt-more " href="javascript:void(0) ">More</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item ">
+
+                            <div class="timeline-img "></div>
+                            <div data-aos="fade-right ">
+                                <div class="timeline-content js--fadeInLeft ">
+                                    <div class="date ">5 AUG 2016</div>
+                                    <h2>Quote</h2>
+                                    <blockquote>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta explicabo debitis omnis dolor iste fugit totam quasi inventore!</blockquote>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item ">
+
+                            <div class="timeline-img "></div>
+                            <div data-aos="fade-left ">
+                                <div class="timeline-content timeline-card js--fadeInRight ">
+                                    <div class="timeline-img-header ">
+                                        <h2>Card Title</h2>
+                                    </div>
+                                    <div class="date ">19 AUG 2016</div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe atque totam aperiam sed nulla voluptatem recusandae dolor, nostrum excepturi amet in dolores. Alias, ullam.</p>
+                                    <a class="bnt-more " href="javascript:void(0) ">More</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item ">
+
+                            <div class="timeline-img "></div>
+                            <div data-aos="fade-right ">
+                                <div class="timeline-content js--fadeInLeft ">
+                                    <div class="date ">1 SEP 2016</div>
+                                    <h2>Title</h2>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe atque totam aperiam sed nulla voluptatem recusandae dolor, nostrum excepturi amet in dolores. Alias, ullam.</p>
+                                    <a class="bnt-more " href="javascript:void(0) ">More</a>
+                                </div>
+                            </div>
+                        </div-->
+<!--ENd here-->

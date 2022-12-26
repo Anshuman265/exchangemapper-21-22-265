@@ -1,0 +1,9 @@
+{% extends 'main/base.html' %}{% load static%} {% load crispy_forms_tags %}{% block content %}
+<div class="jumbotron">
+    <h1>Filter Courses Here</h1>
+    <hr style="border: 1px solid cornsilk;">
+    <form action="{% url 'main:searchresults' %}" method="get">
+        <input name="q" type="text" placeholder="Search...">
+    </form>
+</div>
+{% endblock %}

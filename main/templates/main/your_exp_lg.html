@@ -1,0 +1,179 @@
+{% extends 'main/base.html' %}{% load static%} {% block content %} {% if heading %}
+<h3 style="margin-top: 15px;">Hello {{heading}},You have to add course mapping</h3>
+{%endif%}
+<table class="table" style="min-height: 62vh;" id="tbl_posts">
+    <thead class="thead-light text-center">
+        <tr>
+            <!--th scope="col">University</th-->
+            <th scope="col">Code</th>
+            <th scope="col">Name</th>
+            <th scope="col">Department</th>
+            <th scope="col">HomeCourse</th>
+            <th scope="col">Season</th>
+            <th scope="col">Year</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <form class="form-horizontal" method="POST" action="">
+        {% csrf_token %} {{ formset.management_form }}
+        <div class="text-center">
+            <div class="text-center">
+                <b>Select University</b> {{uni_only.University}} {% if user.is_staff %}
+                <a href="{%url 'main:add_uni'%}">Can't find your university?Add here!</a>{%endif%}
+            </div>
+        </div>
+        <tbody id="tbl_posts_body">
+            {% for form in formset %}
+            <!--tr-->
+            <tr id="rec-1">
+                <td>
+                    <div class="col-4">
+                        <div class="input-group required" required>
+                            {{form.code}}
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="col-4">
+                        <div class="input-group">
+                            {{form.name}}
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="col-4">
+                        <div class="input-group">
+                            {{form.department}}
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="col-4">
+                        <div class="input-group">
+                            {{form.homecourse}}
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="col-4">
+                        <div class="input-group">
+                            {{form.season}}
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="col-4">
+                        <div class="input-group">
+                            {{form.year}}
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <a class="btn btn-outline-danger delete-record" data-id="1" style="font-size: 15px;">Delete</a>
+                </td>
+            </tr>
+            <!--div style="visibility:hidden !important;">
+                <table id="sample_table">
+                    <tr id="">
+                        <td>
+                            <div class="col-4">
+                                <div class="input-group required" required>
+                                    {{form.code}}
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="col-4">
+                                <div class="input-group">
+                                    {{form.name}}
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="col-4">
+                                <div class="input-group">
+                                    {{form.department}}
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="col-4">
+                                <div class="input-group">
+                                    {{form.homecourse}}
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="col-4">
+                                <div class="input-group">
+                                    {{form.season}}
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="col-4">
+                                <div class="input-group">
+                                    {{form.year}}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div-->
+            {% endfor %}
+            <!--tr>
+                <div class="row spacer">
+                    <td>
+                        <div class="col-4 offset-2 input-group-append">
+                            <a class="btn btn-success add-record" data-added="0" style="border-radius: 50%;font-size: 20px;">+</a>
+                        </div>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <div class="col-8 offset-2 text-center" style="width: 100%;">
+                            <button type="submit" class="btn btn-block btn-primary" style="width:100%;padding:10px;">Submit</button>
+                        </div>
+                    </td>
+                </div>
+            </tr-->
+        </tbody>
+        <button type="submit" class="btn btn-block btn-primary" style="width:100%;padding:10px;">Submit</button>
+    </form>
+</table>
+<a class="btn btn-success add-record" data-added="0" style="border-radius: 50%;font-size: 20px;">+</a> {% endblock %} {% block custom_js %}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    jQuery(document).delegate('a.add-record', 'click', function(e) {
+        console.log("Hey u clicked +");
+        e.preventDefault();
+        var content = jQuery('#tbl_posts >tbody >#rec-1'),
+            size = jQuery('#tbl_posts >tbody >tr').length + 1,
+            element = null,
+            element = content.clone();
+        element.attr('id', 'rec-' + size);
+        element.find('.delete-record').attr('data-id', size);
+        element.appendTo('#tbl_posts_body');
+        element.find('.sn').html(size);
+    });
+    jQuery(document).delegate('a.delete-record', 'click', function(e) {
+        e.preventDefault();
+        var didConfirm = confirm("Are you sure You want to delete?");
+        if (didConfirm == true) {
+            var id = jQuery(this).attr('data-id');
+            var targetDiv = jQuery(this).attr('targetDiv');
+            jQuery('#rec-' + id).remove();
+            //regnerate index number on table
+            $('#tbl_posts_body tr').each(function(index) {
+                //alert(index);
+                $(this).find('span.sn').html(index + 1);
+            });
+            return true;
+        } else {
+            return false;
+        }
+    });
+</script>
+{% endblock %}

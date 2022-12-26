@@ -1,0 +1,330 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exchange Mapper</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'main/nav.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.3/particles.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 600 !important;
+        }
+        
+        .main_text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 88.5vh;
+            position: relative;
+            background-color: #1e1f26;
+            text-align: center;
+            padding: 0 2em;
+        }
+        
+        .main_text h1 {
+            font-size: 5vw;
+            margin: 0;
+            padding-bottom: 0.5rem;
+            letter-spacing: 0.3rem;
+            color: #03dac6;
+            transition: all 0.3s ease;
+            z-index: 3;
+        }
+        
+        h1:hover {
+            transform: translate3d(0, -10px, 22px);
+            color: #ff0266;
+        }
+        
+        .main_text h2 {
+            font-size: 2vw;
+            letter-spacing: 0.3rem;
+            font-family: "ROBOTO", sans-serif;
+            font-weight: 300;
+            color: #faebd7;
+            z-index: 4;
+        }
+        
+        .background {
+            position: absolute;
+            height: 100vh !important;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 0;
+        }
+        
+        @media (min-width: 800px) {
+            .main_text h1,
+            .nav {
+                font-size: 5vw;
+            }
+            .main_text h2,
+            .slider h2 {
+                font-size: 3vw;
+            }
+            .main_text-tab {
+                font-size: 3vw;
+            }
+        }
+        
+        @media screen only (min-width: 360px) {
+            .main_text h1,
+            .nav {
+                font-size: 8vw;
+            }
+            .main_text h2,
+            .slider h2 {
+                font-size: 2vw;
+                letter-spacing: 0.2vw;
+            }
+        }
+        
+        .background {
+            /* position: absolute;*/
+            height: 100vh;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 0;
+        }
+        
+        .buttons {
+            overflow: hidden;
+        }
+        
+        .buttons>div {
+            width: calc(50% - 40px);
+            padding: 20px;
+            float: left;
+            position: fixed;
+            bottom: 0;
+            top: 0;
+        }
+        
+        .buttons .dark {
+            background: #000;
+            left: 50%;
+        }
+        
+        .buttons a {
+            float: left;
+            margin-right: 20px;
+            margin-bottom: 20px;
+        }
+        
+        a#link {
+            position: absolute;
+            left: 20px;
+            bottom: 10px;
+            text-decoration: none;
+            color: #555;
+            font-weight: bold;
+        }
+        /*------------------------------------------------------*/
+        /* BUTTONS */
+        /*------------------------------------------------------*/
+        
+        .btn,
+        input[type="submit"] {
+            cursor: pointer;
+            border-radius: 0px;
+            text-decoration: none;
+            padding: 12px 18px;
+            font-size: 12px;
+            line-height: 19px;
+            text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            letter-spacing: 3px;
+            -webkit-transition: all .4s ease-in-out;
+            -moz-transition: all .4s ease-in-out;
+            -ms-transition: all .4s ease-in-out;
+            -o-transition: all .4s ease-in-out;
+            transition: all .4s ease-in-out;
+        }
+        
+        .btn-mid {
+            border-radius: 0px;
+            text-decoration: none;
+            padding: 14px 21px;
+            font-size: 13px;
+            line-height: 25px;
+            text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            letter-spacing: 3px;
+            -webkit-transition: all .4s ease-in-out;
+            -moz-transition: all .4s ease-in-out;
+            -ms-transition: all .4s ease-in-out;
+            -o-transition: all .4s ease-in-out;
+            transition: all .4s ease-in-out;
+        }
+        
+        .btn:hover,
+        input[type="submit"]:hover {
+            -webkit-transition: all .4s ease-in-out;
+            -moz-transition: all .4s ease-in-out;
+            -ms-transition: all .4s ease-in-out;
+            -o-transition: all .4s ease-in-out;
+            transition: all .4s ease-in-out;
+        }
+        
+        .btn-white {
+            border: solid 2px #fff;
+            background: transparent;
+            color: #fff !important;
+        }
+        
+        .btn-white:hover {
+            border: solid 2px #fff;
+            background: #fff;
+            color: #1f1f1f !important;
+        }
+        
+        .btn-dark,
+        input[type="submit"] {
+            border: solid 2px #1f1f1f;
+            background: transparent;
+            color: #1f1f1f;
+        }
+        
+        .btn-dark:hover,
+        input[type="submit"]:hover,
+        .btn-dark.active {
+            border: solid 2px #1f1f1f;
+            background: #1f1f1f;
+            color: #fff;
+        }
+        
+        .btn-color {
+            background: transparent;
+        }
+        
+        .btn-color:hover {
+            color: #fff;
+        }
+        
+        @media screen and (max-width: 800px) {
+            .btn {
+                font-size: 8px !important;
+                padding: 5px 7px;
+            }
+            .navbar-collapse {
+                z-index: 2 !important;
+            }
+        }
+        
+        .navbar-dark .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+        
+        .navbar-dark .navbar-toggler {
+            background-color: #21D6E7 !important;
+        }
+        
+        @media screen and (max-width: 600px) {
+            .navbar-custom h2,
+            h4 {
+                font-size: 1rem !important;
+            }
+        }
+        
+        @media screen and (max-width: 350px) {
+            .navbar-custom h2,
+            h4 {
+                font-size: 1rem !important;
+            }
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function() {
+            Particles.init({
+                selector: ".background"
+            });
+        };
+        var particles = Particles.init({
+            selector: ".background",
+            color: ["#03dac6", "#ff0266", "#000000"],
+            connectParticles: true,
+            responsive: [{
+                breakpoint: 768,
+                options: {
+                    color: ["#faebd7", "#03dac6", "#ff0266"],
+                    maxParticles: 33,
+                    connectParticles: false
+                }
+            }]
+        });
+    </script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-light py-2 navbar-custom" style="margin-bottom:0px;background-color: #222222 !important;z-index: 1;">
+        <a class="navbar-brand" href="{%url 'main:login_button'%}">
+            <h2>Exchange Mapper</h2>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+
+                {% if user.is_staff %}
+                <li class="nav-item ">
+                    <h4><a class="nav-link " href="{%url 'admin:index' %} ">Admin</a></h4>
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'main:guide' %}">
+                        <h4>Guide</h4>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{%url 'main:mapper_home'%}">
+                        <h4>Mapper</h4>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'main:blog' %}">
+                        <h4>Blogs</h4>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'main:doubt' %}">
+                        <h4>Forum</h4>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <h4><a class="nav-link " href="{%url 'sso:logout' %} ">Logout</a></h4>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <section class="main_text">
+        <h1>Welcome to Exchange Mapper,</h1>
+        <h2> {{current_name}} </h2>
+        <a class="btn btn-white btn-mid" href="{%url 'main:mapper_home'%}" style="z-index: 1;font-family:'Roboto', sans-serif;">GO TO MAPPER</a>
+    </section>
+    <canvas class="background"></canvas>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+
+</html>

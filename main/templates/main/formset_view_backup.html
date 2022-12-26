@@ -1,0 +1,239 @@
+{% extends "main/base.html" %}{% load static%} {% block content %} {% if heading %}
+<h3 class="text-center" style="margin-top: 15px;">Hello {{heading}},You have to add course mapping</h3>
+{%endif%}
+<style>
+    #empty-row {
+        display: none
+    }
+    
+    select {
+        /* width: 100%;*/
+        text-align: center;
+        margin: 0 auto;
+    }
+    
+    input {
+        width: 90%;
+        margin: 0 auto;
+    }
+</style>
+<div class='col-12' style="min-height: 63vh;">
+    <form action='' method='POST'>
+        {% csrf_token %}
+        <br /> {{ formset.management_form }}
+        <div class="text-center" style="margin-bottom: 15px;width: 50%;margin-left: auto;margin-right: auto;">
+            <div class="text-center">
+                <b>Select University</b> {{uni_only.University}} {% if user.is_staff %}
+                <a href="{%url 'main:add_uni'%}">Can't find your university?Add here!</a>{%endif%}
+            </div>
+        </div>
+        <div class="row text-center" style="font-weight: 700;margin-bottom:15px;margin: 15px 0px;">
+            <div class="col" style="background-color: rgb(241, 231, 231);border: 1px solid rgb(196, 189, 189);">
+                Code
+            </div>
+            <div class="col" style="background-color: rgb(241, 231, 231);border: 1px solid rgb(196, 189, 189);">
+                Name
+            </div>
+            <div class="col" style="background-color: rgb(241, 231, 231);border: 1px solid rgb(196, 189, 189);">
+                Department
+            </div>
+            <div class="col" style="background-color: rgb(241, 231, 231);border: 1px solid rgb(196, 189, 189);">
+                Course@IITB
+            </div>
+            <div class="col " style="background-color: rgb(241, 231, 231);border: 1px solid rgb(196, 189, 189);">
+                Season
+            </div>
+            <div class="col" style="background-color: rgb(241, 231, 231);border: 1px solid rgb(196, 189, 189);">
+                Year
+            </div>
+            <div class="col-xl-1" style="background-color: rgb(241, 231, 231);border: 1px solid rgb(196, 189, 189);">
+            </div>
+        </div>
+        {% for form in formset %}
+        <div class='form-row' style="margin-bottom: 10px;">
+            <div class="col ">
+                <div class="input-group required " required>
+                    {{form.code}}
+                </div>
+            </div>
+            <div class="col ">
+                <div class="input-group required " required>
+                    {{form.name}}
+                </div>
+            </div>
+            <div class="col ">
+                <div class="input-group required " required>
+                    {{form.department}}
+                </div>
+            </div>
+            <div class="col ">
+                <div class="input-group required ">
+                    {{form.homecourse}}
+                </div>
+            </div>
+            <div class="col ">
+                <div class="input-group required " required>
+                    {{form.season}}
+                </div>
+            </div>
+            <div class="col ">
+                <div class="input-group required " required>
+                    {{form.year}}
+                </div>
+            </div>
+            <div class="col-1 text-center">
+                <a class="btn btn-outline-danger delete-record" data-id="1" style="font-size: 15px;">Delete</a>
+            </div>
+
+        </div>
+        {% endfor %}
+        <div class='form-row' id='empty-row' style="margin-bottom: 10px;">
+            <div class="col">
+                <div class="input-group required " required>
+                    {{formset.empty_form.code}}
+                </div>
+            </div>
+            <div class="col">
+                <div class="input-group required " required>
+                    {{formset.empty_form.name}}
+                </div>
+            </div>
+            <div class="col ">
+                <div class="input-group required " required>
+                    {{formset.empty_form.department}}
+                </div>
+            </div>
+            <div class="col ">
+                <div class="input-group required " required>
+                    {{formset.empty_form.homecourse}}
+                </div>
+            </div>
+            <div class="col ">
+                <div class="input-group required " required>
+                    {{formset.empty_form.season}}
+                </div>
+            </div>
+            <div class="col ">
+                <div class="input-group required " required>
+                    {{formset.empty_form.year}}
+                </div>
+            </div>
+            <div class="col-1 text-center">
+                <a class="btn btn-outline-danger delete-record" data-id="1" style="font-size: 15px;">Delete</a>
+            </div>
+        </div>
+        <div class='row'>
+            <div class="col-2">
+                <a class='btn btn-outline-primary add-new-form' href='#' style="border-radius:50%;">+</a>
+            </div>
+
+            <div class="col">
+
+            </div>
+            <div class="col-2">
+                <button type="submit " class="btn btn-block btn-primary " style="width:100%;padding:10px; ">Submit</button>
+            </div>
+            <!--a class='btn btn-default' href="{% url 'main:your_exp' %} ">Cancel</a-->
+
+        </div>
+    </form>
+</div>
+<br />
+<br /> {% endblock %} {% block custom_js %}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>
+<script type="text/javascript ">
+    function updateEmptyFormIDs(element, totalForms) {
+        var thisInput = element
+
+        // get current form input name
+        var currentName = element.attr('name')
+            // replace "prefix" with actual number
+        var newName = currentName.replace(/__prefix__/g, totalForms)
+            // console.log(newName)
+
+        // update input with new name
+        thisInput.attr('name', newName)
+        thisInput.attr('id', "id_" + newName)
+
+
+        // create a new form row id
+        var newFormRow = element.closest(".form-row");
+        var newRowId = "row_id_" + newName
+        newFormRow.attr("id", newRowId)
+
+        // add new class for basic graphic animation
+        newFormRow.addClass("new-parent-row")
+            // update form group id
+        var parentDiv = element.parent();
+        parentDiv.attr("id", "parent_id_" + newName)
+
+        // update label id
+        var inputLabel = parentDiv.find("label")
+        inputLabel.attr("for", "id_" + newName)
+
+
+        // return created row
+        return newFormRow
+    }
+
+
+
+    $('.add-new-form').click(function(e) {
+        e.preventDefault()
+            // form id like #id_form-TOTAL_FORMS
+        var formId = "id_form-TOTAL_FORMS"
+
+        // copy empty form
+        var emptyRow = $("#empty-row").clone();
+        // remove id from new form
+        emptyRow.attr("id", null)
+            // Insert row after last row
+
+        // get starting form count for formset
+        var totalForms = parseInt($('#' + formId).val());
+
+        // create new form row from empty form row
+        var newFormRow;
+        emptyRow.find("input, select, textarea").each(function() {
+            newFormRow = updateEmptyFormIDs($(this), totalForms)
+        })
+
+
+        // insert new form at the end of the last form row
+        $(".form-row:last").after(newFormRow)
+
+        // update total form count (to include new row)
+        $('#' + formId).val(totalForms + 1);
+
+        // scroll page to new row
+        $('html, body').animate({
+            scrollTop: newFormRow.offset().top - 100
+        }, 500, function() {
+            // animate background color
+            // requires: jQuery Color: https://code.jquery.com/color/jquery.color-2.1.2.min.js
+            newFormRow.animate({
+                backgroundColor: "#fff"
+            }, 1500)
+        });
+
+    });
+    jQuery(document).delegate('a.delete-record', 'click', function(e) {
+        e.preventDefault();
+        var didConfirm = confirm("Are you sure You want to delete?");
+        if (didConfirm == true) {
+            var id = jQuery(this).attr('data-id');
+            var targetDiv = jQuery(this).attr('targetDiv');
+            jQuery('#rec-' + id).remove();
+            //regnerate index number on table
+            $('#tbl_posts_body tr').each(function(index) {
+                //alert(index);
+                $(this).find('span.sn').html(index + 1);
+            });
+            return true;
+        } else {
+            return false;
+        }
+    });
+</script>
+
+{%endblock%}

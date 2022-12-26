@@ -1,0 +1,21 @@
+.container-fluid {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.card {
+    border-color: rgb(86, 152, 214);
+}
+
+.tab-pane {
+    width: 100%;
+}
+
+.textinput {
+    height: 100px;
+}
+
+button {
+    width: 100%;
+}

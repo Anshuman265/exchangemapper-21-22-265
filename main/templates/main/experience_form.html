@@ -1,0 +1,60 @@
+{% extends 'main/base.html' %} {% load crispy_forms_tags %} {%load static%} {% block content %}
+<link rel="stylesheet" href="{% static 'main/expierence_form.css' %}">
+<style>
+    @media screen and (max-width: 350px) {
+        * {
+            font-size: 0.8rem !important;
+        }
+
+        input {
+            font-size: 0.6rem !important;
+        }
+    }
+
+    @media screen and (max-width: 576px) {
+        * {
+            font-size: 0.8rem !important;
+        }
+
+        input {
+            font-size: 0.6rem !important;
+        }
+    }
+</style>
+<div class="container-fluid" style="margin-bottom: 1.8rem;">
+    <div class="col" style="width:80%;">
+        {% for message in messages %}
+        <div class="row">
+            <div class="alert alert-danger">
+                <a class="close " href="{%url 'main:blog' %} " data-dismiss="alert ">×</a> {{ message }}
+            </div>
+        </div>
+        {% endfor %}
+        <div class="row">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="card" style="width: 100%; ">
+                    <div class="card-header text-center">
+                        Add New Post
+                    </div>
+
+                    <div class="card-body ">
+                        <h5 class="card-title text-center">Blog Post</h5>
+                        <p class="card-text">{{ form.para1|as_crispy_field }}</p>
+                        <p class="card-text">{{ form.para2|as_crispy_field }}{{ form.para3|as_crispy_field }}
+                            {{form.iframe|as_crispy_field}} </p>
+                        <p class="card-text">
+                        <div class="row">
+                            <div class="col">{{ form.img1|as_crispy_field }}</div>
+                            <div class="col">{{ form.img2|as_crispy_field }}</div>
+                            <div class="col">{{ form.img3|as_crispy_field }}</div>
+                        </div>
+                        </p>
+                        <button type='submit' class="btn btn-outline-dark">Post</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,290 @@
+{% extends "main/base.html" %}{% load static%} {% block content %}
+<style>
+    #empty-row {
+        display: none
+    }
+
+    select {
+        /* width: 100%;*/
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    input {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .ui-autocomplete {
+        background-color: inherit;
+        width: 29%;
+        border: 1px solid black;
+    }
+
+    .select2.select2-container.select2-container--default {
+        width: 100% !important;
+    }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/css/select2.min.css"
+    integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% for message in messages %}
+<div class="row">
+    <div class="alert alert-danger">
+        <a class="close " href="{%url 'main:mapper_home' %} " data-dismiss="alert ">×</a> {{ message }}
+    </div>
+</div>
+{% endfor %}
+<div class='col-12' style="min-height: 63vh;">
+    <form action='' method='POST'>
+        {% csrf_token %}
+        <br /> {{ formset.management_form }}
+        <div class="text-center" style="margin-bottom: 15px;width: 60%;margin-left: auto;margin-right: auto;">
+            <div class="row">
+                <div class="col">
+                    <div class="text-center">
+                        <b>Select University</b> {{uni_only.University}}
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="text-center">
+                        <b>Select Season</b> {{season_only.season}}
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="text-center">
+                        <b>Select Year</b> {{season_only.year}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row text-center" style="font-weight: 700;margin-bottom:15px;margin: 15px 0px;">
+            <div class="col" style="background-color: rgb(241, 231, 231);border: 1px solid rgb(196, 189, 189);">
+                Code
+            </div>
+            <div class="col" style="background-color: rgb(241, 231, 231);border: 1px solid rgb(196, 189, 189);">
+                Name
+            </div>
+            <div class="col" style="background-color: rgb(241, 231, 231);border: 1px solid rgb(196, 189, 189);">
+                Course@IITB
+            </div>
+        </div>
+        {% for form in formset %}
+        <div class='form-row' style="margin-bottom: 10px;">
+            <div class="col ">
+                <div class="input-group required " required>
+                    {{form.code}}
+                </div>
+            </div>
+            <div class="col ">
+                <div class="input-group required " required>
+                    {{form.name}}
+                </div>
+            </div>
+            <div class="col">
+                <div class=" input-group required ">
+                    {{form.homecourse}}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class='form-row' id='empty-row' style=" margin-bottom: 10px;">
+            <div class="col">
+                <div class="input-group required " required>
+                    {{formset.empty_form.code}}
+                </div>
+            </div>
+            <div class="col">
+                <div class="input-group required " required>
+                    {{formset.empty_form.name}}
+                </div>
+            </div>
+            <div class="col ">
+                <div class="input-group required " required>
+                    {{formset.empty_form.homecourse}}
+                </div>
+            </div>
+        </div>
+        <div class='row'>
+            <div class="col-2">
+                <a class='btn btn-outline-primary add-new-form' href='#' style="border-radius:50%;">+</a>
+            </div>
+            <div class="col-2">
+                <a class="btn btn-outline-danger delete-record" data-id="1"
+                    style="font-size: 15px;border-radius: 50%;">-</a>
+            </div>
+            <div class="col">
+            </div>
+            <div class="col-2">
+                <button type="submit " class="btn btn-block btn-primary "
+                    style="width:100%;padding:10px; ">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+<br />
+<br /> {% endblock %} {% block custom_js %}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js "
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN "
+    crossorigin="anonymous "></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js">
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/select2.min.js"
+    integrity="sha512-5+FrEmSijjxRArJWeLcCIEgoQYAgU0gSa9MgNMN+tVSS+MPZsEk9a7OkPZr7AzjNJng1Kl+tXOQVtJcsU+Ax0w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script type="text/javascript ">
+
+    var availableTags = [
+        {% for x in result %}
+            "{{x.code}}",
+        {% endfor %}
+    ];
+    var availableTags2 = [
+        {% for x in university %}
+            "{{x.fullname}}",
+        {% endfor %}
+    ];
+     $( function() {
+         /*
+        $("input[id$='homecourse']").autocomplete({
+            source: availableTags
+        });
+        console.log("Autocomplete Activated for the first time !");
+        $( "#id_University" ).autocomplete({
+            source: availableTags2
+        });*/
+        $("#id_University").select2();
+        $("#id_Department").select2();
+        $("#id_season").select2();
+        $("#id_year").select2();
+        $("#id_form-0-homecourse").select2();
+        var formId = "id_form-TOTAL_FORMS"
+        var totalForms = parseInt($('#' + formId).val());
+        for (let i = 1; i <= totalForms; i++) {
+            $("#id_form-" + i  + "-homecourse").select2();;
+        }
+     });
+    function autcompleteDropdown(id_temp) {
+    /*
+    $("input[id$='homecourse']").autocomplete({
+      source: availableTags
+    });
+    console.log(id_temp);*/
+    console.log("#id_form-" + id_temp + "-homecourse")
+    $("#id_form-" + id_temp  + "-homecourse").select2();
+    }
+    function updateEmptyFormIDs(element, totalForms) {
+        var thisInput = element
+
+        // get current form input name
+        var currentName = element.attr('name')
+            // replace "prefix" with actual number
+        var newName = currentName.replace(/__prefix__/g, totalForms)
+            // console.log(newName)
+
+        // update input with new name
+        thisInput.attr('name', newName)
+        thisInput.attr('id', "id_" + newName)
+
+
+        // create a new form row id
+        var newFormRow = element.closest(".form-row");
+        var newRowId = "row_id_" + newName
+        newFormRow.attr("id", newRowId)
+
+        // add new class for basic graphic animation
+        newFormRow.addClass("new-parent-row")
+            // update form group id
+        var parentDiv = element.parent();
+        parentDiv.attr("id", "parent_id_" + newName)
+
+        // update label id
+        var inputLabel = parentDiv.find("label")
+        inputLabel.attr("for", "id_" + newName)
+
+
+        // return created row
+        return newFormRow
+    }
+
+
+
+    $('.add-new-form').click(function(e) {
+        e.preventDefault()
+            // form id like #id_form-TOTAL_FORMS
+        var formId = "id_form-TOTAL_FORMS"
+        // copy empty form
+        var emptyRow = $("#empty-row").clone();
+        // remove id from new form
+        emptyRow.attr("id", null)
+            // Insert row after last row
+
+        // get starting form count for formset
+        var totalForms = parseInt($('#' + formId).val());
+
+        // create new form row from empty form row
+        var newFormRow;
+        emptyRow.find("input, select, textarea").each(function() {
+            newFormRow = updateEmptyFormIDs($(this), totalForms)
+        })
+
+
+        // insert new form at the end of the last form row
+        $(".form-row:last").after(newFormRow)
+
+        // update total form count (to include new row)
+        $('#' + formId).val(totalForms + 1);
+
+        // scroll page to new row
+        $('html, body').animate({
+            scrollTop: newFormRow.offset().top - 100
+        }, 500, function() {
+            // animate background color
+            // requires: jQuery Color: https://code.jquery.com/color/jquery.color-2.1.2.min.js
+            newFormRow.animate({
+                backgroundColor: "#fff"
+            }, 1500)
+        });
+        //console.log(totalForms);
+        autcompleteDropdown(totalForms);
+    });
+    $('.delete-record').click(function(e) {
+        e.preventDefault();
+        var didConfirm = confirm("Are you sure You want to delete?");
+        if (didConfirm == true) {
+            // form id like #id_form-TOTAL_FORMS
+            var formId = "id_form-TOTAL_FORMS";
+                //getting the class of the parent's parent element here
+                //var id_lol = jQuery(this).parent().parent().attr('class');
+            var id_lol = $(".new-parent-row").last().attr('id');
+            console.log(id_lol);
+            $(function() {
+                $('#' + id_lol).remove();
+                console.log("Function ran!");
+            });
+            // copy empty form
+            var emptyRow = $("#empty-row").clone();
+            // remove id from new form
+            emptyRow.attr("id", null)
+                // Insert row after last row
+                // get starting form count for formset
+            var totalForms = parseInt($('#' + formId).val());
+            console.log("Beyond form count");
+            // create new form row from empty form row
+            var newFormRow;
+            emptyRow.find("input, select, textarea").each(function() {
+                newFormRow = updateEmptyFormIDs($(this), totalForms)
+            })
+
+            // update total form count (to include new row)
+            $('#' + formId).val(totalForms - 1);
+            console.log("Reached last line");
+        }
+    });
+</script>
+
+{%endblock%}

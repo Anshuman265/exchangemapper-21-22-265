@@ -1,0 +1,251 @@
+{% extends 'main/base.html' %} {% block content %} {% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/guide.css' %}" />
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script type="text/javascript" language="javascript">
+    $(function() {
+
+        window.sr = ScrollReveal();
+
+        if ($(window).width() < 768) {
+
+            if ($('.timeline-content').hasClass('js--fadeInLeft')) {
+                $('.timeline-content').removeClass('js--fadeInLeft').addClass('js--fadeInRight');
+            }
+
+            sr.reveal('.js--fadeInRight', {
+                origin: 'right',
+                distance: '300px',
+                easing: 'ease-in-out',
+                duration: 800,
+            });
+
+        } else {
+
+            sr.reveal('.js--fadeInLeft', {
+                origin: 'left',
+                distance: '300px',
+                easing: 'ease-in-out',
+                duration: 800,
+            });
+
+            sr.reveal('.js--fadeInRight', {
+                origin: 'right',
+                distance: '300px',
+                easing: 'ease-in-out',
+                duration: 800,
+            });
+
+        }
+
+        sr.reveal('.js--fadeInLeft', {
+            origin: 'left',
+            distance: '300px',
+            easing: 'ease-in-out',
+            duration: 800,
+        });
+
+        sr.reveal('.js--fadeInRight', {
+            origin: 'right',
+            distance: '300px',
+            easing: 'ease-in-out',
+            duration: 800,
+        });
+
+
+    });
+</script>
+
+<!--AOS CSS-->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<!--AOS JS-->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({
+            duration: 1200,
+        })
+        // Get the modal
+</script>
+<header>
+    <div class="container text-center">
+        <h1>Process for Outbound Exchange Student</h1>
+        <p>Students of IITB interested in participating in Exchange programs of IITB with international universities need to start preparing for it well in advance. Students can do course work and/or project work at an Institution with whom IITB has an MoU.
+            There are separate schemes for student exchanges and research work, the details of which are available under list of MoUs. For doing project/research work at a Host institution the onus of finding a guide rests with the student. They also
+            need the concurrence of the project guide at IITB if they wish to submit their work done abroad towards their degree and get credits for it.</p>
+        <!--p>Sava Lazic</p-->
+    </div>
+</header>
+
+<section class="timeline">
+    <div class="container">
+        <div class="timeline-item">
+            <div class="timeline-img"></div>
+            <div class="timeline-content js--fadeInLeft">
+                <h2>While applying</h2>
+                <div class="date">Step 1</div>
+                <p>See the list of MoUs. <br> You must plan your visit in such a way that the academic calendar of IIT Bombay is maintained.
+                    <br> <em>For course work:</em>
+                    <ol>
+                        <li>Identify the university that you would like to go to, from the IR website.</li>
+                        <li>Make a list of the courses that you should be taking at IITB in the semester(s) in which you want to go on a sem ....</li>
+                    </ol>
+                </p>
+            </div>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Launch demo modal
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                See the list of MoUs You must plan your visit in such a way that the academic calendar of IIT Bombay is maintained. For course work: 1.Identify the university that you would like to go to, from the IR website. 2.Make a list of the courses that you should
+                                be taking at IITB in the semester(s) in which you want to go on a semester/year long exchange. Prepare a table clearly indicating the IITB courses and the equivalent courses at the Host institute. Mention your SPI / CPI
+                                in the application (Attach copy of transcript as available on ASC). For Minor related courses, you must also obtain prior permission from the relevant department offering the minor. For Honors courses, you must have the
+                                approval of Head of the Department for equivalence of the Honors courses from the host institute. 3.Look at the host university websites to select the courses that you’d like to do over there. (Choose 2-3 courses in addition
+                                to the ones required so that in case the course you want to take is not offered, you have an alternative.) For project work: 1.You have to identify a project or make a plan for research work along with your departmental
+                                BTP/DDP/MTP guide. 2.Write to a professor at the host university to see if (s)he will accept you to do research work. Your guide may have contacts in the host university and they may help you by forwarding your email with
+                                their comments/ recommendations. 3.On receiving an acceptance note from the host professor, you need to follow the remaining steps as for the course work students. (Step 4 onwards are common for course work or project/research
+                                work students) 4.Write a letter addressed to the Dean IR, and forward it through the Head of your department, indicating your interest in proceeding for the exchange program. This should include a request for approval for
+                                courses/project/research work that you want to do in lieu of the courses/project that you would have done at IITB. Also, attach your latest grade sheet reflecting your current CPI. The Department approval should reach the
+                                Office of Dean-IR at least 15 days prior to the Host Institute’s deadline. 5.Once the approval from your HOD is received, the office of Dean IR will put you in touch with the International office of the Host institute and
+                                provide you with the links for online application for your exchange program. Host universities require the physical forms, countersigned by the Dean IR, to be sent by post as well. The student is responsible for getting
+                                these forms signed and posting it to the Host University. (Note: If the number of applications received exceed the number of seats available under the exchange program at the host institute, Dean-IR will shortlist the students
+                                on the basis of their CPI). Simultaneously, Dean-IR will forward the applications of the nominated students to the Convener- UGAPEC / PGAPEC (as applicable) with his recommendation. 6.The final decision to admit each student
+                                nominated for the exchange rests with the host institute. Also, the student is permitted to proceed for the exchange program only after receiving the permission letter from the Academic office. 7.Finances: A] In most cases,
+                                the finances are to be borne by the students themselves. IITB does not have any mechanism yet, to support exchange students financially. Some exchange agreements include a funding mechanism and this information is provided,
+                                where available, on the IR website – Exchange MoUs page. B] In some universities, as indicated on the IR website, free accommodation is available. C] Some universities have associated scholarships/awards that can be applied
+                                for separately. D] In some universities, students are allowed to work part time in on-campus positions including working on research projects. This option can be exercised to defray some of the living expenses. IITB cannot
+                                assist in procuring such positions. These have to be sought by the students themselves.
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-img"></div>
+
+            <div class="timeline-content timeline-card js--fadeInRight">
+                <div class="timeline-img-header">
+                    <h2>Card Title</h2>
+                </div>
+                <div class="date">25 MAY 2016</div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe atque totam aperiam sed nulla voluptatem recusandae dolor, nostrum excepturi amet in dolores. Alias, ullam.</p>
+                <a class="bnt-more" href="javascript:void(0)">More</a>
+            </div>
+
+        </div>
+
+        <div class="timeline-item">
+
+            <div class="timeline-img"></div>
+            <div data-aos="fade-right">
+                <div class="timeline-content js--fadeInLeft">
+                    <div class="date">3 JUN 2016</div>
+                    <h2>Quote</h2>
+                    <blockquote>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta explicabo debitis omnis dolor iste fugit totam quasi inventore!</blockquote>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+
+            <div class="timeline-img"></div>
+            <div data-aos="fade-left">
+                <div class="timeline-content js--fadeInRight">
+                    <h2>Title</h2>
+                    <div class="date">22 JUN 2016</div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe atque totam aperiam sed nulla voluptatem recusandae dolor, nostrum excepturi amet in dolores. Alias, ullam.</p>
+                    <a class="bnt-more" href="javascript:void(0)">More</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+
+            <div class="timeline-img"></div>
+            <div data-aos="fade-right">
+                <div class="timeline-content timeline-card js--fadeInLeft">
+                    <div class="timeline-img-header">
+                        <h2>Card Title</h2>
+                    </div>
+                    <div class="date">10 JULY 2016</div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe atque totam aperiam sed nulla voluptatem recusandae dolor, nostrum excepturi amet in dolores. Alias, ullam.</p>
+                    <a class="bnt-more" href="javascript:void(0)">More</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+
+            <div class="timeline-img"></div>
+            <div data-aos="fade-left">
+                <div class="timeline-content timeline-card js--fadeInRight">
+                    <div class="timeline-img-header">
+                        <h2>Card Title</h2>
+                    </div>
+                    <div class="date">30 JULY 2016</div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe atque totam aperiam sed nulla voluptatem recusandae dolor, nostrum excepturi amet in dolores. Alias, ullam.</p>
+                    <a class="bnt-more" href="javascript:void(0)">More</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+
+            <div class="timeline-img"></div>
+            <div data-aos="fade-right">
+                <div class="timeline-content js--fadeInLeft">
+                    <div class="date">5 AUG 2016</div>
+                    <h2>Quote</h2>
+                    <blockquote>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta explicabo debitis omnis dolor iste fugit totam quasi inventore!</blockquote>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+
+            <div class="timeline-img"></div>
+            <div data-aos="fade-left">
+                <div class="timeline-content timeline-card js--fadeInRight">
+                    <div class="timeline-img-header">
+                        <h2>Card Title</h2>
+                    </div>
+                    <div class="date">19 AUG 2016</div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe atque totam aperiam sed nulla voluptatem recusandae dolor, nostrum excepturi amet in dolores. Alias, ullam.</p>
+                    <a class="bnt-more" href="javascript:void(0)">More</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+
+            <div class="timeline-img"></div>
+            <div data-aos="fade-right">
+                <div class="timeline-content js--fadeInLeft">
+                    <div class="date">1 SEP 2016</div>
+                    <h2>Title</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe atque totam aperiam sed nulla voluptatem recusandae dolor, nostrum excepturi amet in dolores. Alias, ullam.</p>
+                    <a class="bnt-more" href="javascript:void(0)">More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock content %}

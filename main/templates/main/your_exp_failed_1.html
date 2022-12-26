@@ -1,0 +1,206 @@
+{% extends 'main/base.html' %}{% load static%} {% block content %} {% if heading %}
+<h3 style="margin-top: 15px;">Hello {{heading}},You have to add course mapping</h3>
+{%endif%}
+<table class="table" style="min-height: 62vh;">
+    <thead class="thead-light text-center">
+        <tr>
+            <!--th scope="col">University</th-->
+            <th scope="col">Code</th>
+            <th scope="col">Name</th>
+            <th scope="col">Department</th>
+            <th scope="col">HomeCourse</th>
+            <th scope="col">Season</th>
+            <th scope="col">Year</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <form class="form-horizontal" method="POST" action="" id="form-container">
+        {% csrf_token %} {{ formset.management_form }}
+        <div class="text-center">
+            <div class="text-center">
+                <b>Select University</b> {{uni_only.University}} {% if user.is_staff %}
+                <a href="{%url 'main:add_uni'%}">Can't find your university?Add here!</a>{%endif%}
+            </div>
+        </div>
+        {% for form in formset %}
+        <tbody>
+            <!--tr-->
+            <tr id="rowadd" class="bird-form">
+                <td>
+                    <div class="col-4">
+                        <div class="input-group required" required>
+                            {{form.code}}
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="col-4">
+                        <div class="input-group">
+                            {{form.name}}
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="col-4">
+                        <div class="input-group">
+                            {{form.department}}
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="col-4">
+                        <div class="input-group">
+                            {{form.homecourse}}
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="col-4">
+                        <div class="input-group">
+                            {{form.season}}
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="col-4">
+                        <div class="input-group">
+                            {{form.year}}
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    Delete
+                </td>
+            </tr>
+
+            {% endfor %}
+            <tr>
+                <div class="row spacer">
+                    <td>
+                        <!--Add new form button-->
+                        <div class="col-4 offset-2 input-group-append">
+                            <button id="add-form" class="btn btn-success add-form-row" style="border-radius: 50%;font-size: 20px;">+</button>
+                        </div>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <div class="col-8 offset-2 text-center" style="width: 100%;">
+                            <button type="submit" class="btn btn-block btn-primary" style="width:100%;padding:10px;">Submit</button>
+                        </div>
+                    </td>
+                </div>
+            </tr>
+        </tbody>
+    </form>
+</table>
+<script>
+    let birdForm = document.querySelectorAll(".bird-form")
+    let container = document.querySelector("#form-container")
+    let addButton = document.querySelector("#add-form")
+    let totalForms = document.querySelector("#id_form-TOTAL_FORMS")
+
+    let formNum = birdForm.length - 1
+    addButton.addEventListener('click', addForm)
+
+    function addForm(e) {
+        e.preventDefault()
+
+        let newForm = birdForm[0].cloneNode(true)
+        let formRegex = RegExp(`form-(\\d){1}-`, 'g')
+
+        formNum++
+        newForm.innerHTML = newForm.innerHTML.replace(formRegex, `form-${formNum}-`)
+        container.insertBefore(newForm, addButton)
+
+        totalForms.setAttribute('value', `${formNum + 1}`)
+        console.log("Button pressed");
+    }
+</script>
+{% endblock %} {% block custom_js %}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+<!--script type="text/javascript">
+    function updateElementIndex(el, prefix, ndx) {
+        var id_regex = new RegExp('(' + prefix + '-\\d+)');
+        var replacement = prefix + '-' + ndx;
+        if ($(el).attr("for")) $(el).attr("for", $(el).attr("for").replace(id_regex, replacement));
+        if (el.id) el.id = el.id.replace(id_regex, replacement);
+        if (el.name) el.name = el.name.replace(id_regex, replacement);
+    }
+
+    function cloneMore(selector, prefix) {
+        var newElement = $(selector).clone(true);
+        var total = $('#id_' + prefix + '-TOTAL_FORMS').val();
+        newElement.find(':input:not([type=button]):not([type=submit]):not([type=reset])').each(function() {
+            var name = $(this).attr('name')
+            if (name) {
+                name = name.replace('-' + (total - 1) + '-', '-' + total + '-');
+                var id = 'id_' + name;
+                $(this).attr({
+                    'name': name,
+                    'id': id
+                }).val('').removeAttr('checked');
+            }
+        });
+        newElement.find('label').each(function() {
+            var forValue = $(this).attr('for');
+            if (forValue) {
+                forValue = forValue.replace('-' + (total - 1) + '-', '-' + total + '-');
+                $(this).attr({
+                    'for': forValue
+                });
+            }
+        });
+        total++;
+        $('#id_' + prefix + '-TOTAL_FORMS').val(total);
+        $(selector).after(newElement);
+        var conditionRow = $('.form-row:not(:last)');
+        conditionRow.find('.btn.add-form-row')
+            .removeClass('btn-success').addClass('btn-danger')
+            .removeClass('add-form-row').addClass('remove-form-row')
+            .html('-');
+        return false;
+    }
+
+    function deleteForm(prefix, btn) {
+        var total = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+        if (total > 1) {
+            btn.closest('.form-row').remove();
+            var forms = $('.form-row');
+            $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
+            for (var i = 0, formCount = forms.length; i < formCount; i++) {
+                $(forms.get(i)).find(':input').each(function() {
+                    updateElementIndex(this, prefix, i);
+                });
+            }
+        }
+        return false;
+    }
+    $(document).on('click', '.add-form-row', function(e) {
+        e.preventDefault();
+        cloneMore('#rowadd:last', 'form');
+        return false;
+    });
+    $(document).on('click', '.remove-form-row', function(e) {
+        e.preventDefault();
+        deleteForm('form', $(this));
+        return false;
+    });
+</script-->
+{% endblock %}
+<!--td>
+                                        <div class="input-group">
+                                            {{form.university}}
+                                        </div>
+                                        {% if user.is_staff %}
+                                        <a href="{%url 'main:add_uni'%}">Can't find your university?Add here!</a>{%endif%}
+                                    </td-->
+<!--td>
+                                                                        <div class="input-group">
+                                                                            {{form.university}}
+                                                                        </div>
+                                                                        <a href="{%url 'main:add_uni'%}">Can't find your university?Add here!</a>
+                                                                    </td-->

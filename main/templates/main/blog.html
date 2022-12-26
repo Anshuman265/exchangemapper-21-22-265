@@ -1,0 +1,82 @@
+{% extends 'main/base.html' %} {%load static%} {% load crispy_forms_tags %} {% block content %}
+<link rel="stylesheet" href=" {% static 'main/blog_list.css' %}  ">
+<style>
+    @media screen and (max-width: 350px) {
+        footer {
+            font-size: 0.6rem !important;
+            position: absolute;
+            bottom: 0 !important;
+            margin: 0 auto;
+        }
+    }
+</style>
+<div class="jumbotron text-center">
+    <h1 class="display-4">Semester Exchange Expierence Blog</h1>
+    <!-- <p class="lead">Semester Exchange Expierence Blog</p> -->
+
+    <div style="width: 50%;margin: 0 auto;align-content: center;">
+        <form action="{% url 'main:blog' %}" method="get">
+            <div class="container">
+                <div class="row search-bar">
+                    <div class="col-lg-10 col-md-10 col-md-6  col-sm-9 search-crispy">
+                        {{form.university_search|as_crispy_field}}</div>
+                    <div class="col-lg-1 col-md-1 col-sm-1 search-icon-dark">
+                        <button type="submit" class="btn btn-outline-dark" style="border-radius: 15px;" ">
+                                <i class=" fas fa-search "></i> </button>
+                </div>
+                </div>
+            </div>
+        </form>
+    </div >
+    <!-- <hr class=" my-4 "> -->
+    <p class=" lead ">
+        <!-- <a class=" btn btn-dark btn-lg " href=" #blogs " role=" button ">Read Blogs</a> -->
+        <a href=" {%url 'main:fill_exp' %} " class=" btn btn-outline-dark btn-lg ">Start Writing</a>
+    </p>
+</div>
+
+
+
+<div class=" container-fluid " id=" blogs " >
+    {% if Exp|length == 0 %}
+    <h3 class=" text-center " style=" background-color:#F5F5F5;height:12rem;padding:10px;display: flex;align-items:
+                            center;text-align: center;margin-bottom: 1.8rem; "> <span style=" margin: 0 auto; ">No Blogs Found!</span> </h3>
+    {% else %}
+    <div style=" display:flex;flex-direction:row;flex-wrap:wrap;justify-content: center; ">
+        {%for Exp in Exp%} {% if Exp.is_verified != 0 %}
+        <div class=" card " style=" width: 21rem;margin: 10px; ">
+            <div class=" img-wrapper ">
+                <a href=" {% url 'main:experience-detail' Exp.id %}"><img class=" card-img-top " src=" {{Exp.img1.url}} " alt=" Card image
+                            cap "></a>
+            </div>
+            <div class=" card-body ">
+                <h5 class=" card-title ">By - {{Exp.UserInfo.name}}</h5>
+                <p class=" card-text "> {{Exp.para1|truncatewords:25}} <a href=" {{Exp.id}}\detail\ " class=" ">Read More</a> </p>
+                <div class=" row ">
+                    <!--div class=" col-3 " style=" background-color: red; "><a href=" {{Exp.id}}\detail\ " class=" btn
+                            btn-outline-primary btn ">Read More</a></div-->
+                    <div class=" col ">
+                        <div class=" card-footer text-muted ">
+                            Posted on {{Exp.date_posted}}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        {%endif%} {%endfor%}
+    </div>
+</div>
+{%endif%} {% endblock content %}
+
+<!--div class=" row align-items-center ">
+                <div class=" col ">
+                    <img src=" {{Exp.img1.url}} " alt=" ">
+                </div>
+                <div class=" col ">
+                    {{Exp.UserInfo.name}}
+                </div>
+                <div class=" col ">
+                    <a href=" {{Exp.id}}\detail\ "> Read More </a>
+                </div>
+            </div-->

@@ -1,0 +1,14 @@
+{%extends 'main/base.html'%}{% load crispy_forms_tags %}{% load static %} {%block content%}
+
+<div class="container" style="height: 77%;width:60%;">
+    <div class="h2">Q) {{doubt.text}} </div>
+    <div class="h6"> <span class="text-muted">Asked by -</span> {{doubt.student.name}} </div>
+    <form method="POST">
+        <div class="form-group">
+            {%csrf_token%} {{ form|crispy }}
+            <button class="btn btn-success" type="submit"> Submit</button>
+        </div>
+    </form>
+</div>
+
+{%endblock content%}

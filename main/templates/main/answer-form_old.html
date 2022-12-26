@@ -1,0 +1,30 @@
+{%extends 'main/base.html'%}{% load crispy_forms_tags %} {%block content%} {% load static %}
+<div class="container">
+	{% for data in list_answer %}
+	{% if not data.author.name %}
+		<h1> Anonymous </h1>
+	{% else %}
+		<h1> {{data.author.name}} </h1>
+	{% endif %}
+	<div> {{data.text}} </div>
+ {{data.upvote}} 
+ 			
+		<a href = "/upvote/{{data.pk}}">Add Upvote </a> 
+
+	<div>
+		{{data.downvote}}
+		<a href = "/downvote/{{data.pk}}">Add Downvote </a> </div>
+		
+	</div>
+	<hr>	
+{% endfor %}
+</div>
+<div class="container">
+<div>Add an answer ?</div>
+<form method="POST">
+{%csrf_token%} {{ form|crispy }}
+<button class="btn" type="submit"> Submit</button>
+</form>
+</div>
+
+{%endblock content%}

@@ -1,0 +1,103 @@
+{% load static %} {% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Login | | Exchange Mapper, IIT Bombay</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login_page.css' %} ">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <!-- Custom styles for this template-->
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Outer Row -->
+        <div class="row align-items-center justify-content-center ">
+
+            <div class="col-xl-10 col-lg-12 col-md-9">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+
+                    <div class="card-body p-0" style="border-right: 7px solid #55BCA1;border-left: 7px solid #1f1645;">
+
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col d-none d-lg-block">
+                                <div class=" bg-1-image " style="position: relative;top: 50%;transform: translateY(-50%); ">
+                                    <img src="{% static 'main/ugac.png' %} " alt=" " width="300 " style="border-right: 1px solid rgb(224, 210, 210);">
+                                </div>
+                            </div>
+                            <div class="col d-none d-lg-block bg-2-image " >
+                                <div class="bg-1-image text-center " style="position: relative;top: 50%;transform: translateY(-50%); ">
+                                    <img src="{% static 'main/logo.jpeg' %} " alt=" " width="200 ">
+                                </div>
+                            </div>
+                            <div class="col ">
+                                <div class="p-5 ">
+                                    <div class="text-center ">
+                                        <h1 class="h4 text-gray-900 mb-4 ">Exchange Mapper</h1>
+                                        <form method="post">
+                                            {%csrf_token%} {{ form|crispy }}
+                                            <button type="submit" class="log fourth" style="margin: 10px auto;padding:8px ">Login with SSO</button>
+                                            <!--button type="submit" class="btn-primary" style="margin-top: 10px;border-radius:20px;padding:8px">Login with SSO</button-->
+                                        </form>
+                                        <hr>
+                                        <div class="text-center ">
+                                            <p class="small ">Exchange Mapper</p>
+                                        </div>
+                                        <div class="text-center ">
+                                            <p class="small "><b>Undergraduate Academic Council 2021</b><br>
+                                                <a href="{% url 'main:team' %} " style="color: black;">UGAC Web Team 2021</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+</body>
+
+</html>
+
+<!-- <form class="user ">
+                    <div class="form-group ">
+                      <input type="email " class="form-control form-control-user " id="exampleInputEmail " aria-describedby="emailHelp " placeholder="Enter Email Address... ">
+                    </div>
+                    <div class="form-group ">
+                      <input type="password " class="form-control form-control-user " id="exampleInputPassword " placeholder="Password ">
+                    </div>
+                    <div class="form-group ">
+                      <div class="custom-control custom-checkbox small ">
+                        <input type="checkbox " class="custom-control-input " id="customCheck ">
+                        <label class="custom-control-label " for="customCheck ">Remember Me</label>
+                      </div>
+                    </div>
+                    <a href="index.html " class="btn btn-primary btn-user btn-block ">
+                      Login
+                    </a>
+                    <hr>
+                    <a href="index.html " class="btn btn-google btn-user btn-block ">
+                      <i class="fab fa-google fa-fw "></i> Login with Google
+                    </a>
+                    <a href="index.html " class="btn btn-facebook btn-user btn-block ">
+                      <i class="fab fa-facebook-f fa-fw "></i> Login with Facebook
+                    </a>
+                   </form>-->

@@ -1,0 +1,174 @@
+{%extends 'main/base.html'%}{% load crispy_forms_tags %} {%block content%} {% load static %}
+<link href="{% static 'css/bootstrap.min.css' %}">
+<!--Adding the stylus CSS-->
+<!--link rel="stylesheet" href="{% static 'main/mapper.css' %}"-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/css/select2.min.css"
+    integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style type="text/css">
+    select {
+        width: 100%;
+        cursor: pointer;
+        padding: 10px 15px;
+        outline: 0;
+        border: 0;
+        border-radius: 0;
+        background: #e6e6e6 !important;
+        color: #7b7b7b;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+    }
+
+    input {
+        width: 100%;
+        cursor: pointer;
+        padding: 10px 15px;
+        outline: 0;
+        border: 0;
+        border-radius: 0;
+        background: #e6e6e6 !important;
+        color: #7b7b7b;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+    }
+
+    .form-group {
+        text-align: center;
+    }
+
+    form {
+        border: 1px solid #D3D3D3;
+        width: 55%;
+        margin: 5px auto;
+        border-radius: 5px;
+    }
+</style>
+<div class="container" style="min-height: 100vh !important;">
+    <form method="get" action="{%url 'main:mapper_home'%}" class="form-horizontal text-center">
+        <h2 class="text-center" style="margin: 0 auto;background-color:#D3D3D3">Filters</h2>
+        <div class="col-10" style="margin: 0 auto;">
+            <div class="row">
+                <div class="col">
+                    <div class="input-group">
+                        <div style="width:100%">{{form.University|as_crispy_field}}</div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="input-group">
+                        <div style="width: 100%;">{{form.semester|as_crispy_field}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="input-group">
+                        <div style="width: 100%;">{{form.year|as_crispy_field}}</div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="input-group">
+                        <div style="width: 100%;">{{form.department|as_crispy_field}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-bottom:15px">
+                <div class="col text-center mb-2">
+                    <button type="submit" class="btn btn-outline-dark"
+                        style="border-radius: 15px;width:100%">Filter</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="col">
+        <a class="btn btn-outline-dark" style="float:right;margin-top:10px;margin-bottom:10px;"
+            href="{% url 'main:your_exp' %}"> Add your course map</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Profile</th>
+                    <th scope="col">Course Name @IITB</th>
+                    <th scope="col">Course Code @IITB</th>
+                    <th scope="col">Course Name @Ex Univ</th>
+                    <th scope="col">Course Code @Ex Univ</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {%if passon.p|length == 0%}
+                <tr>
+                    <td>No data found</td>
+                    <td>No data found</td>
+                    <td>No data found</td>
+                    <td>No data found</td>
+                    <td>No data found</td>
+                </tr>
+                {%else%} {%for x in passon.p%}
+                <tr>
+                    <td>{{x.UserInfo.name}}
+                        <ul>
+                            <i class="fas fa-bookmark"></i>&nbsp; {{x.UserInfo.department}} <br>
+                            <i class="fas fa-university"></i> {{x.University}}
+                        </ul>
+                    </td>
+                    <td>
+                        <ol>
+                            {%for c in x.remote_courses.all%}
+                            <li>{{c.homecourse.name}}</li>
+                            <hr> {%endfor%}
+
+                        </ol>
+                    </td>
+                    <td>
+                        <ol>
+                            {%for c in x.remote_courses.all%}
+                            <li>{{c.homecourse.code}}</li>
+                            <hr> {%endfor%}
+
+                        </ol>
+                    </td>
+                    <td>
+                        <ol>
+                            {%for c in x.remote_courses.all%}
+                            <li>{{c.name}}</li>
+                            <hr>{%endfor%}
+                        </ol>
+                    </td>
+                    <td>
+                        <ol>
+                            {%for c in x.remote_courses.all%}
+                            <li>{{c.code}}</li>
+                            <hr>{%endfor%}
+
+                        </ol>
+
+                    </td>
+                </tr>
+                {%endfor%} {%endif%}
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js "
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN "
+    crossorigin="anonymous "></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/select2.min.js"
+    integrity="sha512-5+FrEmSijjxRArJWeLcCIEgoQYAgU0gSa9MgNMN+tVSS+MPZsEk9a7OkPZr7AzjNJng1Kl+tXOQVtJcsU+Ax0w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#id_University").select2();
+        $("#id_semester").select2();
+        $("#id_year").select2();
+        $("#id_department").select2();
+    });
+
+</script>
+{%endblock content%}
